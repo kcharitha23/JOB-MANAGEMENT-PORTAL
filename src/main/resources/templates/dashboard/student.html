@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::content}, 'Student Dashboard - CareerFlow')}">
+<body>
+    <div th:fragment="content">
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="nav-side">
+                    <h3 class="mb-4 text-primary">Menu</h3>
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item"><a th:href="@{/student/dashboard}" class="nav-link active"><i class="fas fa-th-large"></i>My Dashboard</a></li>
+                        <li class="nav-item"><a th:href="@{/jobs}" class="nav-link"><i class="fas fa-briefcase"></i>Browse Jobs</a></li>
+                        <li class="nav-item"><a th:href="@{/student/profile}" class="nav-link"><i class="fas fa-user-edit"></i>Update Profile</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 th:text="'Hello, ' + ${user.firstName}">Hello, Student</h1>
+                        <p class="text-muted">Manage your applications and track status.</p>
+                    </div>
+                </header>
+
+                <div class="stats-grid mb-4">
+                    <div class="stat-card">
+                        <p>Applications</p>
+                        <h3 th:text="${#lists.size(applications)}">0</h3>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm overflow-hidden">
+                    <div class="card-header bg-transparent border-bottom py-3 px-4">
+                        <h5 class="mb-0">My Applications</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="ps-4">Job Title</th>
+                                    <th>Employer</th>
+                                    <th>Applied On</th>
+                                    <th class="pe-4">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="app : ${applications}">
+                                    <td class="ps-4 fw-semibold" th:text="${app.job.title}">Software Engineer</td>
+                                    <td th:text="${app.job.employerProfile.companyName}">Google</td>
+                                    <td th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">15 Apr 2024</td>
+                                    <td class="pe-4">
+                                        <span th:class="'badge status-badge badge-' + ${#strings.toLowerCase(app.status)}" th:text="${app.status}">APPLIED</span>
+                                    </td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(applications)}">
+                                    <td colspan="4" class="text-center py-5 text-muted">You haven't applied to any jobs yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

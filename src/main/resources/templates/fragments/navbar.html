@@ -1,0 +1,69 @@
+<div th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/jobs}">Job Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item" sec:authorize="hasAuthority('EMPLOYER')"><a class="nav-link" th:href="@{/jobs/create}">Create Job</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/auth/login}">Login</a></li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/auth/register}">Register</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="${#authentication.principal.authorities[0].authority == 'STUDENT' ? '/student/dashboard' : '/employer/dashboard'}">Dashboard</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/auth/logout}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-link nav-link">Logout</button>
+                    </form>
+                </li>
+                <!-- Theme Toggle Button -->
+                <li class="nav-item">
+                    <button id="theme-toggle" class="nav-link btn btn-link" title="Toggle Light/Dark Mode">
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CareerBuddy Chatbot -->
+<div id="chatbot-container">
+    <div id="chatbot-window">
+        <div id="chatbot-header">
+            <h6>CareerBuddy</h6>
+            <span id="chatbot-close" style="cursor:pointer;">&times;</span>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Type a message...">
+            <button id="chatbot-send">Send</button>
+        </div>
+    </div>
+    <div id="chatbot-bubble">
+        <span>💬</span>
+    </div>
+</div>
+
+<script th:src="@{/js/chatbot.js}"></script>
+<!-- Inline script to prevent FOUC -->
+<script>
+    (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+</script>
+<script src="/js/theme.js"></script>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::content}, 'Join CareerFlow')}">
+<body>
+    <div th:fragment="content">
+        <div class="auth-container">
+            <div class="auth-card animate-in" style="max-width: 550px;">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold mb-2">Create Account</h2>
+                    <p class="text-muted">Join the professional marketplace today</p>
+                </div>
+
+                <form th:action="@{/auth/register}" th:object="${user}" method="post">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold mb-2">First Name</label>
+                            <input type="text" th:field="*{firstName}" class="form-control py-2 px-3" 
+                                   placeholder="John" style="border-radius: 12px;" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold mb-2">Last Name</label>
+                            <input type="text" th:field="*{lastName}" class="form-control py-2 px-3" 
+                                   placeholder="Doe" style="border-radius: 12px;" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold mb-2">Email Address</label>
+                        <input type="email" th:field="*{email}" class="form-control py-2 px-3" 
+                               placeholder="john@example.com" style="border-radius: 12px;" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold mb-2">Password</label>
+                        <input type="password" th:field="*{password}" class="form-control py-2 px-3" 
+                               placeholder="••••••••" style="border-radius: 12px;" required>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label fw-semibold mb-2">I am a:</label>
+                        <select th:field="*{role}" class="form-select py-3 px-3" style="border-radius: 12px; cursor: pointer;">
+                            <option value="STUDENT">Student / Job Seeker</option>
+                            <option value="EMPLOYER">Employer / Hiring Manager</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid mb-4">
+                        <button type="submit" class="btn btn-primary py-3 fw-bold" 
+                                style="border-radius: 14px; font-size: 1rem; background: var(--primary-gradient); border: none; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);">
+                            Register
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-0">Already have an account? 
+                            <a th:href="@{/auth/login}" class="text-decoration-none fw-bold" style="color: #6366f1;">Login</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

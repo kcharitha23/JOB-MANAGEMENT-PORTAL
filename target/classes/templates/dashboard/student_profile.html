@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::content}, 'Update Profile - CareerFlow')}">
+<body>
+    <div th:fragment="content">
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="nav-side">
+                    <h3 class="mb-4 text-primary">Menu</h3>
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item"><a th:href="@{/student/dashboard}" class="nav-link"><i class="fas fa-th-large"></i>My Dashboard</a></li>
+                        <li class="nav-item"><a th:href="@{/jobs}" class="nav-link"><i class="fas fa-briefcase"></i>Browse Jobs</a></li>
+                        <li class="nav-item"><a th:href="@{/student/profile}" class="nav-link active"><i class="fas fa-user-edit"></i>Update Profile</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <header class="mb-4">
+                    <h1 th:text="'Hello, ' + ${user.firstName}">Hello, Student</h1>
+                    <p class="text-muted">Keep your credentials up to date to attract top employers.</p>
+                </header>
+
+                <div class="card border-0 shadow-sm p-4">
+                    <h5 class="mb-4 fw-bold">My Student Credentials</h5>
+                    <form th:action="@{/student/profile/update}" th:object="${profile}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Professional Header / Current Title</label>
+                            <input type="text" th:field="*{currentTitle}" class="form-control" placeholder="e.g. Recent Graduate - CS" />
+                            <div class="form-text">This will be visible to employers when you apply.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Technical Skills Matrix</label>
+                            <textarea th:field="*{skills}" class="form-control" rows="5" placeholder="Java, Spring Boot, MySQL, API Development..."></textarea>
+                            <div class="form-text">List your technical expertise separated by commas.</div>
+                        </div>
+                        
+                        <div class="d-grid d-md-flex justify-content-md-start">
+                            <button type="submit" class="btn btn-primary px-5 py-2">Update Profile Values</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+

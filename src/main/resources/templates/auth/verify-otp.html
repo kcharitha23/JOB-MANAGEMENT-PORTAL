@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::content}, 'Verify OTP - CareerFlow')}">
+<body>
+    <div th:fragment="content">
+        <div class="auth-container">
+            <div class="auth-card animate-in">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold mb-2">OTP Verification</h2>
+                    <p class="text-muted mb-0">
+                        Enter the 6-digit OTP generated for
+                        <span class="fw-semibold" th:text="${email}">email@example.com</span>
+                    </p>
+                </div>
+
+                <div th:if="${error}" class="alert alert-danger py-2 mb-4 text-center" style="font-size: 0.9rem; border-radius: 12px;">
+                    <span th:text="${error}">Invalid OTP.</span>
+                </div>
+
+                <div th:if="${message}" class="alert alert-info py-2 mb-4 text-center" style="font-size: 0.9rem; border-radius: 12px;">
+                    <span th:text="${message}">OTP generated.</span>
+                </div>
+
+                <div class="text-center mb-4 p-4" style="background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 16px;">
+                    <div class="text-muted small fw-semibold mb-2">Demo OTP</div>
+                    <div class="fw-bold" th:text="${otp}" style="font-size: 2rem; letter-spacing: 0.35rem; color: var(--text-heading);">123456</div>
+                </div>
+
+                <form th:action="@{/auth/verify-otp}" method="post">
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold mb-2">Enter OTP</label>
+                        <input type="text" name="otp" class="form-control py-3 px-4 text-center"
+                               inputmode="numeric" minlength="6" maxlength="6" pattern="[0-9]{6}"
+                               placeholder="000000" style="border-radius: 14px; letter-spacing: 0.35rem;" required autofocus>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary py-3 fw-bold"
+                                style="border-radius: 14px; font-size: 1rem; background: var(--primary-gradient); border: none; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);">
+                            Verify OTP
+                        </button>
+                    </div>
+                </form>
+
+                <form th:action="@{/auth/resend-otp}" method="post" class="text-center">
+                    <button type="submit" class="btn btn-link fw-semibold text-decoration-none">
+                        Generate New OTP
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

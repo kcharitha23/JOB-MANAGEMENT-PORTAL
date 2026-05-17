@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><head>
+    <title>Post a Job</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/style.css?v=22" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 mt-3 mb-5">
+            <h2 class="mb-4">Create Job Posting</h2>
+            <div class="card shadow-sm p-4">
+                <form th:action="@{/jobs/create}" th:object="${job}" method="post">
+                    <div class="mb-3">
+                        <label>Job Title</label>
+                        <input type="text" th:field="*{title}" class="form-control" placeholder="e.g. Senior Java Developer" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label>Location</label>
+                        <input type="text" th:field="*{location}" class="form-control" placeholder="e.g. Remote, San Francisco" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label>Job Type</label>
+                        <select th:field="*{jobType}" class="form-select" required>
+                            <option value="FULL_TIME">Full Time</option>
+                            <option value="PART_TIME">Part Time</option>
+                            <option value="CONTRACT">Contract</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label>Salary Range</label>
+                        <input type="text" th:field="*{salaryRange}" class="form-control" placeholder="e.g. $100k - $120k" required/>
+                    </div>
+                    <div class="mb-4">
+                        <label>Detailed Description & Requirements</label>
+                        <textarea th:field="*{description}" class="form-control" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success px-4">Publish Job</button>
+                    <a th:href="@{/jobs}" class="btn btn-light ms-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
