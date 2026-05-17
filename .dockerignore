@@ -1,0 +1,9 @@
+.git
+.github
+.settings
+.vscode
+target
+untitled
+uploads
+*.log
+*.class

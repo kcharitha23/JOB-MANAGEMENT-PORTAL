@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: job-portal-management-system
+    env: docker
+    plan: free
+    healthCheckPath: /jobs
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: 8080
